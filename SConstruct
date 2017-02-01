@@ -241,7 +241,7 @@ LIBRARY_FLAGS = {
   'msvc': {
     'all': {
       'CCFLAGS':      ['$DIALECTFLAGS', '$WARNINGFLAGS'],
-      'CXXFLAGS':     ['/GR-', '/Gy'],
+      'CXXFLAGS':     ['/GR-', '/Gy', '/EHsc'],
       'CPPDEFINES':   ['WIN32'],
       'LINKFLAGS':    ['/INCREMENTAL:NO', '/NXCOMPAT', '/IGNORE:4221'],
       'CCPDBFLAGS':   ['/Zi']
@@ -338,7 +338,7 @@ V8_EXTRA_FLAGS = {
   },
   'msvc': {
     'all': {
-      'WARNINGFLAGS': ['/W3', '/WX', '/wd4351', '/wd4355', '/wd4800']
+      'WARNINGFLAGS': ['/W3', '/WX', '/wd4351', '/wd4355', '/wd4800', '/wd4091']
     },
     'library:shared': {
       'CPPDEFINES': ['BUILDING_V8_SHARED'],

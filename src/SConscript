@@ -233,7 +233,7 @@ SOURCES = {
   'os:solaris': ['platform-solaris.cc', 'platform-posix.cc'],
   'os:cygwin':  ['platform-cygwin.cc', 'platform-posix.cc'],
   'os:nullos':  ['platform-nullos.cc'],
-  'os:win32':   ['platform-win32.cc', 'win32-math.cc'],
+  'os:win32':   ['platform-win32.cc'], #, 'win32-math.cc'],
   'mode:release': [],
   'mode:debug': [
     'objects-debug.cc', 'prettyprinter.cc', 'regexp-macro-assembler-tracer.cc'
@@ -260,8 +260,8 @@ PREPARSER_SOURCES = {
     token.cc
     unicode.cc
     utils.cc
-    """),
-  'os:win32': ['win32-math.cc']
+    """)
+  #'os:win32': ['win32-math.cc']
 }
 
 

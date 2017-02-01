@@ -65,7 +65,7 @@ int signbit(double x);
 #ifdef WIN32
 
 // Microsoft Visual C++ specific stuff.
-#ifdef _MSC_VER
+#if _MSC_VER < 1800
 
 #include "win32-math.h"
 
@@ -88,8 +88,7 @@ inline int lrint(double flt) {
   return intgr;
 }
 
-
-#endif  // _MSC_VER
+#endif  // _MSC_VER < 1800
 
 // Random is missing on both Visual Studio and MinGW.
 int random();
