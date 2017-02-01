@@ -1159,7 +1159,7 @@ SIMPLE_OPTIONS = {
   },
   'I_know_I_should_build_with_GYP': {
     'values': ['yes', 'no'],
-    'default': 'no',
+    'default': 'yes',
     'help': 'grace period: temporarily override SCons deprecation'
   }
 
