@@ -2200,7 +2200,7 @@ class NewSpace : public Space {
     return static_cast<uint32_t>(addr - start_) >> kPointerSizeLog2;
   }
 
-  INLINE(Address MarkbitIndexToAddress(uint32_t index)) {
+  INLINE(Address MarkbitIndexToAddress(intptr_t index)) {
     return reinterpret_cast<Address>(index << kPointerSizeLog2);
   }
 

@@ -444,7 +444,7 @@ class SerializationAddressMapper {
     return reinterpret_cast<void*>(obj->address());
   }
 
-  static void* Value(int v) {
+  static void* Value(intptr_t v) {
     return reinterpret_cast<void*>(v);
   }
 
