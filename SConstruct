@@ -939,7 +939,7 @@ D8_FLAGS = {
 
 SUFFIXES = {
   'release': '',
-  'debug': '_g'
+  'debug': 'd'
 }
 
 
