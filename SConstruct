@@ -937,12 +937,6 @@ D8_FLAGS = {
 }
 
 
-SUFFIXES = {
-  'release': '',
-  'debug': 'd'
-}
-
-
 def Abort(message):
   print message
   sys.exit(1)
@@ -1447,9 +1441,8 @@ def BuildSpecific(env, mode, env_overrides, tools):
 
   # Generate library base name.
   target_id = mode
-  suffix = SUFFIXES[target_id]
-  library_name = 'v8' + suffix
-  preparser_library_name = 'v8preparser' + suffix
+  library_name = 'v8'
+  preparser_library_name = 'v8preparser'
   version = GetVersion()
   if context.options['soname'] == 'on':
     # When building shared object with SONAME version the library name.
@@ -1499,9 +1492,9 @@ def BuildSpecific(env, mode, env_overrides, tools):
 
   context.ApplyEnvOverrides(d8_env)
   if context.options['library'] == 'static':
-    shell = d8_env.Program('d8' + suffix, object_files + shell_files)
+    shell = d8_env.Program('d8', object_files + shell_files)
   else:
-    shell = d8_env.Program('d8' + suffix, shell_files)
+    shell = d8_env.Program('d8', shell_files)
     d8_env.Depends(shell, library)
   context.d8_targets.append(shell)
 
@@ -1516,7 +1509,7 @@ def BuildSpecific(env, mode, env_overrides, tools):
       exports='sample context tools',
       duplicate=False
     )
-    sample_name = sample + suffix
+    sample_name = sample
     sample_program = sample_env.Program(sample_name, sample_object)
     sample_env.Depends(sample_program, library)
     context.sample_targets.append(sample_program)
