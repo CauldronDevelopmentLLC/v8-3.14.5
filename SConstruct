@@ -1458,9 +1458,10 @@ def BuildSpecific(env, mode, env_overrides, tools):
   # Build the object files by invoking SCons recursively.
   d8_env = Environment(tools=tools)
   d8_env.Replace(**context.flags['d8'])
+  build_dir = join('obj', target_id)
   (object_files, shell_files, mksnapshot, preparser_files) = env.SConscript(
     join('src', 'SConscript'),
-    build_dir=join('obj', target_id),
+    build_dir=build_dir,
     exports='context tools d8_env',
     duplicate=False
   )
@@ -1472,21 +1473,23 @@ def BuildSpecific(env, mode, env_overrides, tools):
 
   context.ApplyEnvOverrides(env)
   if context.options['library'] == 'static':
-    library = env.StaticLibrary(library_name, object_files)
-    preparser_library = env.StaticLibrary(preparser_library_name,
-                                          preparser_files)
+    library = env.StaticLibrary(join(build_dir, library_name), object_files)
+    preparser_library = \
+        env.StaticLibrary(join(build_dir, preparser_library_name),
+                          preparser_files)
   else:
     # There seems to be a glitch in the way scons decides where to put
     # PDB files when compiling using MSVC so we specify it manually.
     # This should not affect any other platforms.
     pdb_name = library_name + '.dll.pdb'
-    library = env.SharedLibrary(library_name, object_files, PDB=pdb_name)
+    library = env.SharedLibrary(join(build_dir, library_name), object_files,
+                                PDB=pdb_name)
     preparser_pdb_name = preparser_library_name + '.dll.pdb';
     preparser_soname = 'lib' + preparser_library_name + '.so';
-    preparser_library = env.SharedLibrary(preparser_library_name,
-                                          preparser_files,
-                                          PDB=preparser_pdb_name,
-                                          SONAME=preparser_soname)
+    preparser_library = \
+        env.SharedLibrary(join(build_dir, preparser_library_name),
+                          preparser_files, PDB=preparser_pdb_name,
+                          SONAME=preparser_soname)
   context.library_targets.append(library)
   context.library_targets.append(preparser_library)
 
